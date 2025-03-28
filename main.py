@@ -11,7 +11,6 @@ height = 800
 board_size = 8
 square_size = height // board_size
 max_fps = 60
-test = 20
 
 
 # Vynulování hodnot
