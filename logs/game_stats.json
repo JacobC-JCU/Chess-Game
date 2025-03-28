@@ -1,8 +1,10 @@
 {
-    "whiteToMove": false,
-    "white_time": 899.1443011760712,
-    "black_time": 898.2553997039795,
+    "whiteToMove": true,
+    "white_time": 894.4123795032501,
+    "black_time": 889.6147203445435,
     "eliminated": [
-        "bp"
+        "bp",
+        "bp",
+        "bQ"
     ]
 }
