@@ -1,15 +1,6 @@
 {
     "whiteToMove": true,
-    "white_time": 881.1807928085327,
-    "black_time": 884.9170577526093,
-    "eliminated": [
-        "bp",
-        "bp",
-        "wp",
-        "wp",
-        "bQ",
-        "bp",
-        "bp",
-        "wQ"
-    ]
+    "white_time": 888.3138341903687,
+    "black_time": 895.1750380992889,
+    "eliminated": []
 }

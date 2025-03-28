@@ -62,7 +62,7 @@ class GameState:
             ["xx", "xx", "xx", "xx", "xx", "xx", "xx", "xx"],
             ["wp", "wp", "wp", "wp", "wp", "wp", "wp", "wp"],
             ["wR", "wN", "wB", "wQ", "wK", "wB", "wN", "wR"]
-        ]
+        ]  
 
         # Inicializace seznamů pro pozice bílých a černých figur
         self.obsazene_pozice_white = []
@@ -546,6 +546,32 @@ class GameState:
         if not self.obsazene_pozice_black and not self.obsazene_pozice_white:
             draw_right_menu(gs, "The game is drawn")
             play_option = "end_game"
+
+        if not self.obsazene_pozice_black:
+            seznam = []
+            for move in self.possible_moves_black_king_check:
+                if move in self.possible_moves_white:
+                    continue
+                if move in self.obsazene_pozice_white and move in self.safe_W:
+                    continue
+                seznam.append(move)
+            # Pokud žádné tahy nejsou
+            if not seznam and not gs.whiteToMove and black_check == False:
+                draw_right_menu(gs, "The game is drawn")
+                play_option = "end_game"
+
+        if not self.obsazene_pozice_white:
+            seznam = []
+            for move in self.possible_moves_white_king_check:
+                if move in self.possible_moves_black:
+                    continue
+                if move in self.obsazene_pozice_black and move in self.safe_B:
+                    continue
+                seznam.append(move)
+            # Pokud žádné tahy nejsou
+            if not seznam and gs.whiteToMove and white_check == False:
+                draw_right_menu(gs, "The game is drawn")
+                play_option = "end_game"
 
     def get_path_to_king(self, piece_pos, king_pos):
         # Funkce, co počítá cestu mezi dvěmi figurky
