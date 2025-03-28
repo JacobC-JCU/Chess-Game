@@ -543,10 +543,12 @@ class GameState:
                 draw_right_menu(gs, "The white king's check")
                 white_check = True
 
+        # Remíza - Pokud jsou na šachovnici jen králové (v obsazených pozicích souřadnice králů nejsou)
         if not self.obsazene_pozice_black and not self.obsazene_pozice_white:
             draw_right_menu(gs, "The game is drawn")
             play_option = "end_game"
 
+        # Remíza - Pokud král není v šachu a zároveň se nemá kam pohnout
         if not self.obsazene_pozice_black:
             seznam = []
             for move in self.possible_moves_black_king_check:
@@ -560,6 +562,7 @@ class GameState:
                 draw_right_menu(gs, "The game is drawn")
                 play_option = "end_game"
 
+        # Remíza - Pokud král není v šachu a zároveň se nemá kam pohnout
         if not self.obsazene_pozice_white:
             seznam = []
             for move in self.possible_moves_white_king_check:
