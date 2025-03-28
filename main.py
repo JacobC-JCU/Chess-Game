@@ -1,3 +1,9 @@
+##################################################
+#                   Welcome                      #
+#            Copyright Jakub Vavřík              #
+##################################################
+
+
 import pygame as p
 from abc import ABC, abstractmethod
 import time
