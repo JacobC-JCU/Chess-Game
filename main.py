@@ -11,6 +11,8 @@ height = 800
 board_size = 8
 square_size = height // board_size
 max_fps = 60
+test = 20
+
 
 # Vynulování hodnot
 eliminate_pieces = []
@@ -658,7 +660,6 @@ class GameState:
 class LoadGame:
     def __init__(self, screen, gs):
         self.gs = gs
-        self.test = "XXX"
         self.screen = screen
         self.loadgame_rect = p.Rect(100, 200, 600, 400)
         self.buttons = {
