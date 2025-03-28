@@ -62,8 +62,7 @@ class GameState:
             ["xx", "xx", "xx", "xx", "xx", "xx", "xx", "xx"],
             ["wp", "wp", "wp", "wp", "wp", "wp", "wp", "wp"],
             ["wR", "wN", "wB", "wQ", "wK", "wB", "wN", "wR"]
-        ]   
-        self.moveLog = []
+        ]
 
         # Inicializace seznamů pro pozice bílých a černých figur
         self.obsazene_pozice_white = []
@@ -80,6 +79,8 @@ class GameState:
 
         self.safe_B = []
         self.safe_W = []
+
+        self.moveLog = []
         
         # Nastavení časů hráčů a nulováný error message
         self.error_message = None
@@ -124,6 +125,8 @@ class GameState:
 
         self.safe_B = []
         self.safe_W = []
+
+        self.moveLog = []
 
         self.error_message = None
         self.error_message_time = 0 
@@ -274,7 +277,7 @@ class GameState:
 
             return True
     def check(self, gs):
-        global black_check, white_check
+        global black_check, white_check, play_option
         # Vynulování seznamu s pozicemi figurek
         self.possible_moves_white = []
         self.possible_moves_black = []                        
@@ -539,6 +542,11 @@ class GameState:
                 # Nastavení šachu
                 draw_right_menu(gs, "The white king's check")
                 white_check = True
+
+        if not self.obsazene_pozice_black and not self.obsazene_pozice_white:
+            draw_right_menu(gs, "The game is drawn")
+            play_option = "end_game"
+
     def get_path_to_king(self, piece_pos, king_pos):
         # Funkce, co počítá cestu mezi dvěmi figurky
         path = []
@@ -1364,8 +1372,10 @@ def main():
             #Zjištění, kdo vyhrál
             if white_check:
                 gs.error_message = "Checkmate - Black's won"
-            else:
+            elif black_check:
                 gs.error_message = "Checkmate - White's won"
+            else:
+                gs.error_message = "Draw - No one wins.."
 
             # Zachycení kliknutí
             for event in p.event.get():
@@ -1396,7 +1406,7 @@ def main():
 
             buttons = {
             "Play again": (450, 400, "game_player_vs_player"),
-            "The end": (650, 400, "reset_game"),
+            "The end": (650, 400, "reset_game")
             }
 
             
