@@ -93,7 +93,7 @@ class GameState:
         self.update_occupied_positions()
     def reset(self):
         # Funkce pro reset hry
-        global black_check, white_check
+        global black_check, white_check, eliminate_pieces
         black_check = False
         white_check = False
 
@@ -135,7 +135,9 @@ class GameState:
         self.black_time = 15 * 60  
         self.last_time = time.time() 
 
-        self.update_occupied_positions()    
+        self.update_occupied_positions()
+        eliminate_pieces = [] 
+        self.whiteToMove = True 
 
     def draw_error_message(self, message, screen):
         current_time = time.time()  # Získání aktuálního času
@@ -1388,7 +1390,6 @@ def main():
 
         if play_option == "reset_game":
             # Reset hry
-
             # Z nějakého důvodu aktuálně nefunguje...
             black_check = False
             white_check = False
@@ -1397,6 +1398,10 @@ def main():
 
         if play_option == "end_game":
             # Vykreslení menu pro ukončení hry
+            buttons = {
+            "Play again": (450, 400, "reset_game"),
+            "The end": (650, 400, "exit"),
+            }
 
             #Zjištění, kdo vyhrál
             if white_check:
@@ -1414,7 +1419,8 @@ def main():
                     x, y = event.pos
                     for text, (bx, by, action) in buttons.items():
                         if bx <= x <= bx + 100 and by <= y <= by + 40:
-                            return action
+                            play_option = action
+                            
 
             # Vykreslení menu
             end_game_menu = p.Rect(300, 200, 600, 400)
@@ -1432,12 +1438,6 @@ def main():
             logo_rect = logo.get_rect()
             logo_rect.center = (600, 530)
             screen.blit(logo, logo_rect)
-
-            buttons = {
-            "Play again": (450, 400, "game_player_vs_player"),
-            "The end": (650, 400, "reset_game")
-            }
-
             
             for text, (x, y, action) in buttons.items():
                 btn_text = font_button.render(text, True, p.Color("white"))
